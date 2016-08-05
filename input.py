@@ -75,6 +75,4 @@ def get_input(board, ship_tuple, taken):
     for line in board:
         print(line)
 
-    print(str(taken))
-
     return board, taken
