@@ -14,7 +14,7 @@ def get_input(board, ship_tuple, taken):
         [x_str, y_str, direction] = input().lower().split()
     except ValueError:
         print('Invalid input. Try again.')
-        get_input(board, ship, taken)
+        get_input(board, ship_tuple, taken)
 
     x = eval(x_str)
     y = eval(y_str)
@@ -22,7 +22,7 @@ def get_input(board, ship_tuple, taken):
 
     if not (0 < y <= 10 and 0 < x <= 10):
         print('Invalid input. Try again.')
-        get_input(board, ship, taken)
+        get_input(board, ship_tuple, taken)
 
     y_prime = 21 - (y*2)
     if d == 'u':
@@ -34,7 +34,7 @@ def get_input(board, ship_tuple, taken):
                 taken.add((x, y + (i // 2)))
         else:
             print('Invalid input. Try again.')
-            get_input(board, ship, taken)
+            get_input(board, ship_tuple, taken)
     elif d == 'd':
         if not reduce(lambda a, b: a or b, [(x, i) in taken for i in range(y - spaces, y)], False):
             for i in range(0, spaces*2, 2):
@@ -44,7 +44,7 @@ def get_input(board, ship_tuple, taken):
                 taken.add((x, y - (i // 2)))
         else:
             print('Invalid input. Try again.')
-            get_input(board, ship, taken)
+            get_input(board, ship_tuple, taken)
     elif d == 'l':
         if not reduce(lambda a, b: a or b, [(i, y) in taken for i in range(x - spaces, x)], False):
             board[y_prime] = board[y_prime][:(x - spaces) * 5] \
@@ -54,7 +54,7 @@ def get_input(board, ship_tuple, taken):
                 taken.add((i, y))
         else:
             print('Invalid input. Try again.')
-            get_input(board, ship, taken)
+            get_input(board, ship_tuple, taken)
     elif d == 'r':
         if not reduce(lambda a, b: a or b, [(i, y) in taken for i in range(x, x + spaces)], False):
             board[y_prime] = board[y_prime][:(x - 1) * 5] \
@@ -64,10 +64,10 @@ def get_input(board, ship_tuple, taken):
                 taken.add((i, y))
         else:
             print('Invalid input. Try again.')
-            get_input(board, ship, taken)
+            get_input(board, ship_tuple, taken)
     else:
         print('Invalid input. Try again.')
-        get_input(board, ship, taken)
+        get_input(board, ship_tuple, taken)
 
     # clears
     system('cls')
